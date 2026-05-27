@@ -236,13 +236,25 @@ export default function App() {
         paddingBottom: "16px",
         borderBottom: `1px solid ${C.border}`,
       }}>
-        <div>
-          <h1 style={{ fontSize: isMobile ? "17px" : "20px", fontWeight: 700, color: C.text, letterSpacing: "-0.4px", margin: 0 }}>
-            Solar + BESS Financial Estimator
-          </h1>
-          <p style={{ fontSize: "12px", color: C.textSec, marginTop: "3px" }}>
-            Adjust plant parameters to model project economics
-          </p>
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <img
+            src="/logo.jpeg"
+            alt="Lith-On logo"
+            style={{
+              height: isMobile ? "36px" : "44px",
+              width: "auto",
+              borderRadius: "6px",
+              flexShrink: 0,
+            }}
+          />
+          <div>
+            <h1 style={{ fontSize: isMobile ? "17px" : "20px", fontWeight: 700, color: C.text, letterSpacing: "-0.4px", margin: 0 }}>
+              Solar + BESS Financial Estimator
+            </h1>
+            <p style={{ fontSize: "12px", color: C.textSec, marginTop: "3px" }}>
+              Adjust plant parameters to model project economics
+            </p>
+          </div>
         </div>
         <span style={{
           fontSize: "10px", padding: "5px 12px", borderRadius: "99px",
