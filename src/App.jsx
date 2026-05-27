@@ -331,8 +331,8 @@ export default function App() {
 
           <Panel>
             <SectionTitle>Plant Inputs</SectionTitle>
-            <SliderInput label="Solar Plant Size" value={solarMW}    setValue={setSolarMW}    min={1}  max={500}  step={1}   unit="MW" />
-            <SliderInput label="Battery Size"     value={batteryMWh} setValue={setBatteryMWh} min={0}  max={1000} step={5}   unit="MWh" />
+            <SliderInput label="Solar Plant Size" value={solarMW}    setValue={setSolarMW}    min={1}  max={2000}  step={1}   unit="MW" />
+            <SliderInput label="Battery Size"     value={batteryMWh} setValue={setBatteryMWh} min={0}  max={4000} step={5}   unit="MWh" />
             <SliderInput label="PPA Tariff"       value={ppa}        setValue={setPpa}        min={2}  max={12}   step={0.1} unit="₹/kWh" />
             <SliderInput label="CUF"              value={cuf}        setValue={setCuf}        min={1}  max={35}   step={0.5} unit="%" />
             <p style={{ fontSize: "11px", color: cufWarn ? C.amber : C.green, fontWeight: 500, marginTop: "-4px" }}>
