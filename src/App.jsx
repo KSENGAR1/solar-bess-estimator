@@ -238,7 +238,7 @@ export default function App() {
       }}>
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
           <img
-            src="/logo.jpeg"
+            src="/logo.png"
             alt="Lith-On logo"
             style={{
               height: isMobile ? "36px" : "44px",
