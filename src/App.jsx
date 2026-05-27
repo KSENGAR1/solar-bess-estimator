@@ -181,9 +181,9 @@ function SectionTitle({ children }) {
 // ─── Main App ─────────────────────────────────────────────────────────────────
 
 export default function App() {
-  const [solarMW,    setSolarMW]    = useState(20);
-  const [batteryMWh, setBatteryMWh] = useState(40);
-  const [ppa,        setPpa]        = useState(4.5);
+  const [solarMW,    setSolarMW]    = useState(100);
+  const [batteryMWh, setBatteryMWh] = useState(100);
+  const [ppa,        setPpa]        = useState(5.5);
   const [cuf,        setCuf]        = useState(22);
 
   const w       = useWindowWidth();
