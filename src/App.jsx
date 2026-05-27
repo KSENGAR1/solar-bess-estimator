@@ -72,11 +72,32 @@ function KpiCard({ label, value, sub, accent }) {
 }
 
 function SliderInput({ label, value, setValue, min, max, step, unit }) {
-  const handleManual = (e) => {
+  const [inputVal, setInputVal] = useState(String(value));
+
+  // Keep local state in sync when slider (or external source) changes value
+  useEffect(() => {
+    setInputVal(String(value));
+  }, [value]);
+
+  const handleInputChange = (e) => {
+    setInputVal(e.target.value); // let the user type freely
     const v = Number(e.target.value);
-    if (isNaN(v)) return;
-    setValue(Math.min(max, Math.max(min, v)));
+    if (!isNaN(v) && e.target.value !== "") {
+      setValue(Math.min(max, Math.max(min, v)));
+    }
   };
+
+  const handleBlur = () => {
+    const v = Number(inputVal);
+    if (isNaN(v) || inputVal === "") {
+      setInputVal(String(value)); // revert to last valid value
+    } else {
+      const clamped = Math.min(max, Math.max(min, v));
+      setValue(clamped);
+      setInputVal(String(clamped));
+    }
+  };
+
   return (
     <div style={{ marginBottom: "20px" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px" }}>
@@ -84,11 +105,12 @@ function SliderInput({ label, value, setValue, min, max, step, unit }) {
         <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
           <input
             type="number"
-            value={value}
+            value={inputVal}
             min={min}
             max={max}
             step={step}
-            onChange={handleManual}
+            onChange={handleInputChange}
+            onBlur={handleBlur}
             style={{
               width: "72px", fontSize: "12px", fontWeight: 700,
               color: C.blue, background: C.blueLight,
