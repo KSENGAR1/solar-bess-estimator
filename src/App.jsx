@@ -71,16 +71,34 @@ function KpiCard({ label, value, sub, accent }) {
   );
 }
 
-function SliderInput({ label, value, setValue, min, max, step, display }) {
+function SliderInput({ label, value, setValue, min, max, step, unit }) {
+  const handleManual = (e) => {
+    const v = Number(e.target.value);
+    if (isNaN(v)) return;
+    setValue(Math.min(max, Math.max(min, v)));
+  };
   return (
     <div style={{ marginBottom: "20px" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px" }}>
         <span style={{ fontSize: "13px", color: C.textSec, fontWeight: 500 }}>{label}</span>
-        <span style={{
-          fontSize: "12px", fontWeight: 700, color: C.blue,
-          background: C.blueLight, padding: "3px 10px",
-          borderRadius: "99px",
-        }}>{display}</span>
+        <div style={{ display: "flex", alignItems: "center", gap: "6px" }}>
+          <input
+            type="number"
+            value={value}
+            min={min}
+            max={max}
+            step={step}
+            onChange={handleManual}
+            style={{
+              width: "72px", fontSize: "12px", fontWeight: 700,
+              color: C.blue, background: C.blueLight,
+              border: "1px solid rgba(37,99,235,0.2)",
+              borderRadius: "8px", padding: "3px 8px",
+              outline: "none", textAlign: "right",
+            }}
+          />
+          {unit && <span style={{ fontSize: "11px", color: C.textSec, fontWeight: 500 }}>{unit}</span>}
+        </div>
       </div>
       <input type="range" min={min} max={max} step={step} value={value}
         onChange={(e) => setValue(Number(e.target.value))} />
@@ -291,10 +309,10 @@ export default function App() {
 
           <Panel>
             <SectionTitle>Plant Inputs</SectionTitle>
-            <SliderInput label="Solar Plant Size" value={solarMW}    setValue={setSolarMW}    min={1}  max={500}  step={1}   display={`${solarMW} MW`} />
-            <SliderInput label="Battery Size"     value={batteryMWh} setValue={setBatteryMWh} min={0}  max={1000} step={5}   display={`${batteryMWh} MWh`} />
-            <SliderInput label="PPA Tariff"       value={ppa}        setValue={setPpa}        min={2}  max={12}   step={0.1} display={`₹${ppa.toFixed(1)}/kWh`} />
-            <SliderInput label="CUF"              value={cuf}        setValue={setCuf}        min={1}  max={35}   step={0.5} display={`${cuf}%`} />
+            <SliderInput label="Solar Plant Size" value={solarMW}    setValue={setSolarMW}    min={1}  max={500}  step={1}   unit="MW" />
+            <SliderInput label="Battery Size"     value={batteryMWh} setValue={setBatteryMWh} min={0}  max={1000} step={5}   unit="MWh" />
+            <SliderInput label="PPA Tariff"       value={ppa}        setValue={setPpa}        min={2}  max={12}   step={0.1} unit="₹/kWh" />
+            <SliderInput label="CUF"              value={cuf}        setValue={setCuf}        min={1}  max={35}   step={0.5} unit="%" />
             <p style={{ fontSize: "11px", color: cufWarn ? C.amber : C.green, fontWeight: 500, marginTop: "-4px" }}>
               {cufHint}
             </p>
